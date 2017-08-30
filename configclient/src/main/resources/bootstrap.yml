@@ -1,12 +1,12 @@
 spring:
   application:
     name: configclient
-  profiles:
-    active: client1
+#  profiles:
+#    active: client1
   cloud:
     config:
-      profile: client1
-      label: master
+#      profile: client1
+#      label: master
 #      uri: http://localhost:9989
       discovery:
         enabled: true

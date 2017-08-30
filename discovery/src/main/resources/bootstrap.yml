@@ -1,6 +1,6 @@
 spring:
   application:
     name: discovery
-  profiles:
+#  profiles:
 #    active: eureka1
-    active: eureka2
+#    active: eureka2

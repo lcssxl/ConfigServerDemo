@@ -1,10 +1,15 @@
 spring:
   application:
     name: configserver
-  profiles:
+#  profiles:
 #    active: server1
-    active: server2
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:9980/eureka,http://localhost:9990/eureka
+#    active: server2
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/lcssxl/RedBullStudio
+#          uri: https://git.oschina.net/lcssxl/SpringCloudProject
+#          username: ******
+#          password: *****
+#          searchPaths: documents
