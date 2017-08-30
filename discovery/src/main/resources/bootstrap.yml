@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: discovery
+  profiles:
+#    active: eureka1
+    active: eureka2

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  日志文件存放路径默认情况下与项目部署目录同级  -->
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!-- 定义日志文件的存储目录 -->
+    <property name="LOG_HOME" value="/opt/env/springcloud-web/logs/configclient" />
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.out</target>
+        <encoder>
+            <pattern>[%-5level][%date{ISO8601}][%logger][%thread][%X{akkaSource}] - %msg %rootException %n</pattern>
+        </encoder>
+    </appender>
+    <!-- DEBUG日志 时间滚动输出 -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/configclient_debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/configclient_debug.log.%d{yyyyMMdd}</FileNamePattern>
+            <MaxHistory>3</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{ISO8601}][%logger] - %msg %rootException %n</pattern>
+        </encoder>
+    </appender>
+    <!-- INFO日志 时间滚动输出 -->
+    <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/configclient_info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/configclient_info.log.%d{yyyyMMdd}</FileNamePattern>
+            <MaxHistory>5</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{ISO8601}][%logger] - %msg %rootException %n</pattern>
+        </encoder>
+    </appender>
+    <!-- WARN日志 时间滚动输出 -->
+    <appender name="WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/configclient_warn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/configclient_warn.log.%d{yyyyMMdd}</FileNamePattern>
+            <MaxHistory>5</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{ISO8601}][%logger] - %msg %rootException %n</pattern>
+        </encoder>
+    </appender>
+    <!-- ERROR日志 时间滚动输出 -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <file>${LOG_HOME}/configclient_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/configclient_error.log.%d{yyyyMMdd}</FileNamePattern>
+            <MaxHistory>10</MaxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{ISO8601}][%logger][%thread] - %msg %rootException %n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!--标准日志  -->
+    <appender name="standardLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/configclient_standard.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/configclient_standard.log.%d{yyyyMMdd}</FileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{ISO8601}] - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <logger name="standardLog"  additivity="false">
+        <appender-ref ref="standardLogAppender"/>
+    </logger>
+
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="DEBUG"/>
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="WARN"/>
+        <appender-ref ref="ERROR"/>
+    </root>
+
+</configuration>
